@@ -2,12 +2,11 @@ import React from "react"
 import { Text, View, StyleSheet } from "react-native"
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
 import { useSafeAreaInsets } from "react-native-safe-area-context"
-import Tab1Screen from "../screens/Tab1Screen"
-import Tab2Screen from "../screens/ProfileScreen"
+
 import TodosEventos from "./TodosEventos"
-import Academicos from "../screens/Academicos"
-import Deportivos from "../screens/Deportivos"
-import Culturales from "../screens/Culturales"
+import Academicos from "./Academicos"
+import Deportivos from "./Deportivos"
+import Culturales from "./Culturales"
 
 const TopTab = createMaterialTopTabNavigator()
 
@@ -31,7 +30,7 @@ const TopTabNavigator = () => {
   )
 }
 
-const AllEvents = () => {
+const HomeScreen = () => {
   const insets = useSafeAreaInsets()
 
   return (
@@ -48,4 +47,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default AllEvents
+export default HomeScreen

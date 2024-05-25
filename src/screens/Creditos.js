@@ -1,8 +1,9 @@
 import React, { useState } from "react"
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native"
+
 import IP_ADDRESS from "../../config"
 
-const CreditLookupScreen = () => {
+const Creditos = () => {
   const [numeroControl, setNumeroControl] = useState("")
   const [credits, setCredits] = useState(null)
   const [loading, setLoading] = useState(false)
@@ -87,4 +88,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default CreditLookupScreen
+export default Creditos

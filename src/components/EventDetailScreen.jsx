@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react"
 import { View, Text, Image, StyleSheet, Button, Alert } from "react-native"
-import AuthContext from "./AuthContext"
+
+import AuthContext from "../contexts/AuthContext"
 import IP_ADDRESS from "../../config"
 
 const EventDetailScreen = ({ route }) => {

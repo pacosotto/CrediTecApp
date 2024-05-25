@@ -1,11 +1,12 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useState } from "react"
 import { View, StyleSheet } from "react-native"
 import { Calendar } from "react-native-calendars"
 import { useFocusEffect } from "@react-navigation/native"
-import AuthContext from "../components/AuthContext"
+
+import AuthContext from "../contexts/AuthContext"
 import IP_ADDRESS from "../../config"
 
-const Tab2Screen = () => {
+const CalendarComponent = () => {
   const { user } = useContext(AuthContext)
   const [events, setEvents] = useState({})
 
@@ -19,9 +20,8 @@ const Tab2Screen = () => {
       const data = await response.json()
       console.log("Events received:", data)
 
-      // Formatear los datos de eventos para que coincidan con la estructura requerida por markedDates
       const formattedEvents = data.reduce((acc, curr) => {
-        acc[curr.fechaEvento] = { selected: true, selectedColor: "blue" } // Cambia el color a tu preferencia
+        acc[curr.fechaEvento] = { selected: true, selectedColor: "blue" }
         return acc
       }, {})
 
@@ -53,4 +53,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Tab2Screen
+export default CalendarComponent

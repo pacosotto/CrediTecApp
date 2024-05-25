@@ -1,7 +1,8 @@
 import React, { useContext, useState } from "react"
 import { View, Text, TextInput, Button, Alert } from "react-native"
 import { useNavigation } from "@react-navigation/native"
-import AuthContext from "../components/AuthContext"
+
+import AuthContext from "../contexts/AuthContext"
 import IP_ADDRESS from "../../config"
 
 const LoginScreen = () => {
@@ -25,7 +26,6 @@ const LoginScreen = () => {
         throw new Error(data.error || "Error de autenticación")
       }
 
-      // Autenticación exitosa
       setUser({ noControl: numeroControl })
       navigation.navigate("Main")
     } catch (error) {

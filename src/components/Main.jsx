@@ -1,33 +1,26 @@
 import React, { useContext } from "react"
 import { Text, View, StyleSheet } from "react-native"
-import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { MaterialCommunityIcons } from "@expo/vector-icons"
+import { createStackNavigator } from "@react-navigation/stack"
 
 import EventDetailScreen from "./EventDetailScreen"
-import AllEvents from "./HomeEvents"
+import AllEvents from "../screens/HomeScreen"
 import CalendarComponent from "./CalendarComponent"
-import Tab1Screen from "../screens/Tab1Screen"
-import Tab2Screen from "../screens/ProfileScreen"
-import Tab3Screen from "../screens/Tab3Screen"
-import AuthContext from "./AuthContext"
-import { createStackNavigator } from "@react-navigation/stack"
-import OtherScreen from "../screens/Tab1Screen"
+import ProfileScreen from "../screens/ProfileScreen"
+import Creditos from "../screens/Creditos"
+
+import AuthContext from "../contexts/AuthContext"
+import OtherScreen from "../screens/AsignarCreditos"
 
 const Stack = createStackNavigator()
-const TopTab = createMaterialTopTabNavigator()
 const BottomTab = createBottomTabNavigator()
-
-const CustomTabBarLabel = ({ title }) => {
-  return <Text style={styles.customLabel}>{title}</Text>
-}
 
 const Main = () => {
   const { user } = useContext(AuthContext)
   const noControl = user?.noControl
   console.log(noControl)
 
-  // Array de números de control especiales
   const specialNoControlArray = ["23456", "12345", "67890", "11111", "22222"]
   const isSpecialUser = specialNoControlArray.includes(noControl)
   const profileTabName = isSpecialUser ? "Agregar eventos" : "Perfil"
@@ -50,7 +43,7 @@ const Main = () => {
         />
         <BottomTab.Screen
           name={profileTabName}
-          component={Tab2Screen}
+          component={ProfileScreen}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="account" size={24} color={color} />
@@ -89,7 +82,7 @@ const Main = () => {
         {isSpecialUser ? (
           <BottomTab.Screen
             name="Creditos"
-            component={Tab3Screen}
+            component={Creditos}
             options={{
               tabBarIcon: ({ color, size }) => (
                 <MaterialCommunityIcons
@@ -103,22 +96,6 @@ const Main = () => {
         ) : null}
       </BottomTab.Navigator>
     </View>
-  )
-}
-
-const TopTabNavigator = () => {
-  return (
-    <TopTab.Navigator
-      screenOptions={({ route }) => ({
-        tabBarLabel: () => <CustomTabBarLabel title={route.name} />,
-        tabBarIndicatorStyle: { backgroundColor: "blue" },
-      })}
-    >
-      <TopTab.Screen name="Todos" component={AllEvents} />
-      <TopTab.Screen name="Académicos" component={Tab1Screen} />
-      <TopTab.Screen name="Culturales" component={Tab2Screen} />
-      <TopTab.Screen name="Deportivos" component={Tab1Screen} />
-    </TopTab.Navigator>
   )
 }
 
