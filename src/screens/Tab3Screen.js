@@ -44,7 +44,7 @@ const CreditLookupScreen = () => {
         placeholder="Número de Control"
         value={numeroControl}
         onChangeText={setNumeroControl}
-        keyboardType="numeric"
+        keyboardType="default"
       />
       <Button title="Buscar" onPress={handleSearch} disabled={loading} />
       {loading && <Text>Cargando...</Text>}

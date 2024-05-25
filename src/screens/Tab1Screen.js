@@ -55,15 +55,17 @@ const EventCreditScreen = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.eventItem}>
-      <Text>{item.nombreEvento}</Text>
-      <Picker
-        selectedValue={selectedEvents[item.idEvento] || "sinobtener"}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(value) => handlePickerChange(item.idEvento, value)}
-      >
-        <Picker.Item label="Sin obtener" value="sinobtener" />
-        <Picker.Item label="Obtenido" value="obtenido" />
-      </Picker>
+      <Text style={styles.eventName}>{item.nombreEvento}</Text>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={selectedEvents[item.idEvento] || "sinobtener"}
+          style={styles.picker}
+          onValueChange={(value) => handlePickerChange(item.idEvento, value)}
+        >
+          <Picker.Item label="Sin obtener" value="sinobtener" />
+          <Picker.Item label="Obtenido" value="obtenido" />
+        </Picker>
+      </View>
     </View>
   )
 
@@ -100,9 +102,21 @@ const styles = StyleSheet.create({
   },
   eventItem: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10,
+  },
+  eventName: {
+    flex: 1,
+  },
+  pickerContainer: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  picker: {
+    height: 200,
+    width: "100%",
   },
 })
 
