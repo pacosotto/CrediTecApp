@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar"
-import React, { useEffect, useState, useCallback } from "react"
+import React, { useState, useCallback } from "react"
+import { useNavigation, useFocusEffect } from "@react-navigation/native"
 import {
   StyleSheet,
   Text,
@@ -10,14 +11,13 @@ import {
   FlatList,
   Button,
 } from "react-native"
-import { useNavigation, useFocusEffect } from "@react-navigation/native"
+
 import IP_ADDRESS from "../../config"
 
 const ListItem = ({ item }) => {
   const navigation = useNavigation()
 
   const handlePress = () => {
-    // Navegar a la pantalla de detalles del evento
     navigation.navigate("Detalles", {
       eventId: item.idEvento,
       titulo: item.nombreEvento,
@@ -41,11 +41,11 @@ const ListItem = ({ item }) => {
   )
 }
 
-const App = () => {
+const TodosEventos = () => {
   const [events, setEvents] = useState([])
 
   const fetchEvents = useCallback(() => {
-    fetch(`${IP_ADDRESS}:3002/api/eventos`) // Ajusta la URL según sea necesario
+    fetch(`${IP_ADDRESS}:3002/api/eventos`)
       .then((response) => response.json())
       .then((data) => setEvents(data))
       .catch((error) => console.error("Error fetching data:", error))
@@ -95,7 +95,6 @@ const App = () => {
   )
 }
 
-// Función para generar las secciones (horizontal o vertical) según corresponda
 const generateSections = (events) => {
   const horizontalEvents = events.filter((event) => event.horizontal)
   const verticalEvents = events.filter((event) => !event.horizontal)
@@ -134,9 +133,9 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   itemPhoto: {
-    width: "100%", // El ancho será el 100% del contenedor
-    height: 0, // Iniciar en 0 para usar el paddingBottom hack
-    paddingBottom: "20%", // La altura será el 20% del ancho del contenedor
+    width: "100%",
+    height: 0,
+    paddingBottom: "20%",
   },
   itemText: {
     color: "#000",
@@ -145,4 +144,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default App
+export default TodosEventos

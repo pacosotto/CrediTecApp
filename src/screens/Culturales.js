@@ -1,5 +1,6 @@
-import { StatusBar } from "expo-status-bar"
 import React, { useState, useCallback } from "react"
+import { StatusBar } from "expo-status-bar"
+import { useNavigation, useFocusEffect } from "@react-navigation/native"
 import {
   StyleSheet,
   Text,
@@ -10,7 +11,7 @@ import {
   FlatList,
   Button,
 } from "react-native"
-import { useNavigation, useFocusEffect } from "@react-navigation/native"
+
 import IP_ADDRESS from "../../config"
 
 const ListItem = ({ item }) => {
@@ -40,7 +41,7 @@ const ListItem = ({ item }) => {
   )
 }
 
-const App = () => {
+const Culturales = () => {
   const [events, setEvents] = useState([])
 
   const fetchEvents = useCallback(() => {
@@ -158,4 +159,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default App
+export default Culturales

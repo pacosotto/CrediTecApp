@@ -1,9 +1,11 @@
 import React from "react"
 import { NavigationContainer } from "@react-navigation/native"
 import { createStackNavigator } from "@react-navigation/stack"
+
 import LoginScreen from "./src/screens/LoginScreen"
 import Main from "./src/components/Main"
-import { AuthProvider } from "./src/components/AuthContext"
+
+import { AuthProvider } from "./src/contexts/AuthContext"
 
 const Stack = createStackNavigator()
 

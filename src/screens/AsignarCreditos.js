@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import { Picker } from "@react-native-picker/picker"
 import {
   View,
   Text,
@@ -8,16 +9,15 @@ import {
   StyleSheet,
   Alert,
 } from "react-native"
-import { Picker } from "@react-native-picker/picker"
+
 import IP_ADDRESS from "../../config"
 
-const EventCreditScreen = () => {
+const AsignarCreditos = () => {
   const [noControl, setNoControl] = useState("")
   const [events, setEvents] = useState([])
   const [selectedEvents, setSelectedEvents] = useState({})
 
   const handleSearch = () => {
-    // Consulta GET para obtener los eventos asociados al número de control ingresado
     fetch(`${IP_ADDRESS}:3002/api/eventsAlumno/${noControl}`)
       .then((response) => response.json())
       .then((data) => setEvents(data))
@@ -25,7 +25,6 @@ const EventCreditScreen = () => {
   }
 
   const handleCredit = () => {
-    // Aquí puedes enviar la información de los eventos acreditados al servidor
     const creditedEvents = Object.keys(selectedEvents).filter(
       (eventId) => selectedEvents[eventId] === "obtenido"
     )
@@ -55,15 +54,17 @@ const EventCreditScreen = () => {
 
   const renderItem = ({ item }) => (
     <View style={styles.eventItem}>
-      <Text>{item.nombreEvento}</Text>
-      <Picker
-        selectedValue={selectedEvents[item.idEvento] || "sinobtener"}
-        style={{ height: 50, width: 150 }}
-        onValueChange={(value) => handlePickerChange(item.idEvento, value)}
-      >
-        <Picker.Item label="Sin obtener" value="sinobtener" />
-        <Picker.Item label="Obtenido" value="obtenido" />
-      </Picker>
+      <Text style={styles.eventName}>{item.nombreEvento}</Text>
+      <View style={styles.pickerContainer}>
+        <Picker
+          selectedValue={selectedEvents[item.idEvento] || "sinobtener"}
+          style={styles.picker}
+          onValueChange={(value) => handlePickerChange(item.idEvento, value)}
+        >
+          <Picker.Item label="Sin obtener" value="sinobtener" />
+          <Picker.Item label="Obtenido" value="obtenido" />
+        </Picker>
+      </View>
     </View>
   )
 
@@ -100,10 +101,22 @@ const styles = StyleSheet.create({
   },
   eventItem: {
     flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "space-between",
     alignItems: "center",
     marginBottom: 10,
   },
+  eventName: {
+    flex: 1,
+  },
+  pickerContainer: {
+    flex: 1,
+    justifyContent: "center",
+  },
+  picker: {
+    height: 200,
+    width: "100%",
+  },
 })
 
-export default EventCreditScreen
+export default AsignarCreditos

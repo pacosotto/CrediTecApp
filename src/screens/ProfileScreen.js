@@ -1,12 +1,13 @@
 import RNPickerSelect from "react-native-picker-select"
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useState } from "react"
 import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native"
 import { useFocusEffect } from "@react-navigation/native"
-import AuthContext from "../components/AuthContext"
 import DateTimePicker from "@react-native-community/datetimepicker"
+
+import AuthContext from "../contexts/AuthContext"
 import IP_ADDRESS from "../../config"
 
-const Tab2Screen = () => {
+const ProfileScreen = () => {
   const { user } = useContext(AuthContext)
   const [credits, setCredits] = useState({
     crediAca: 0,
@@ -23,7 +24,6 @@ const Tab2Screen = () => {
     showDatePicker: false,
   })
 
-  // Array de números de control especiales
   const specialNoControlArray = ["23456", "12345", "67890", "11111", "22222"]
   const isSpecialUser = specialNoControlArray.includes(user?.noControl)
 
@@ -232,7 +232,7 @@ const pickerSelectStyles = StyleSheet.create({
     borderColor: "gray",
     borderRadius: 4,
     color: "black",
-    paddingRight: 30, // to ensure the text is never behind the icon
+    paddingRight: 30,
     marginBottom: 10,
     width: "100%",
   },
@@ -244,10 +244,10 @@ const pickerSelectStyles = StyleSheet.create({
     borderColor: "gray",
     borderRadius: 8,
     color: "black",
-    paddingRight: 30, // to ensure the text is never behind the icon
+    paddingRight: 30,
     marginBottom: 10,
     width: "100%",
   },
 })
 
-export default Tab2Screen
+export default ProfileScreen
